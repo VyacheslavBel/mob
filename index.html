@@ -333,7 +333,7 @@
         font-size: 1.05rem;
       }
 
-      /* ОСНОВНАЯ СЕКЦИЯ */
+      /* ОСТАЛЬНЫЕ СТИЛИ (сохраняем как было) */
       .main-section {
         min-height: auto;
         background: linear-gradient(135deg, #0f0f12, #0a0a0c, #050505);
@@ -355,7 +355,6 @@
         align-items: start;
       }
 
-      /* Левая колонка */
       .opportunities-list {
         display: flex;
         flex-direction: column;
@@ -437,7 +436,6 @@
         line-height: 1.4;
       }
 
-      /* Правая колонка */
       .right-card {
         background: rgba(25, 25, 35, 0.5);
         backdrop-filter: blur(16px);
@@ -1120,7 +1118,119 @@
         transform: translateY(0);
       }
 
-      /* АДАПТИВ (МОБИЛЬНЫЕ) */
+      /* ===== МОДАЛЬНОЕ ОКНО (ПРЕМИУМ СТИЛЬ) ===== */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(12px);
+        z-index: 10000;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .modal.show-modal {
+        display: flex;
+        animation: fadeIn 0.3s ease forwards;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .modal-content {
+        background: rgba(15, 15, 20, 0.95);
+        backdrop-filter: blur(24px);
+        border: 1px solid rgba(212, 166, 90, 0.3);
+        border-radius: 48px;
+        padding: 48px 40px;
+        max-width: 480px;
+        width: 90%;
+        text-align: center;
+        position: relative;
+        box-shadow:
+          0 40px 100px rgba(0, 0, 0, 0.6),
+          0 0 80px rgba(212, 166, 90, 0.15);
+        transform: scale(0.9);
+        animation: scaleIn 0.3s ease forwards;
+      }
+
+      @keyframes scaleIn {
+        from {
+          transform: scale(0.9);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      .modal-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 24px;
+        background: linear-gradient(
+          135deg,
+          rgba(212, 166, 90, 0.2),
+          rgba(212, 166, 90, 0.05)
+        );
+        border: 1px solid rgba(212, 166, 90, 0.4);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.5rem;
+        color: #d4a65a;
+      }
+
+      .modal-content h3 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: #ecd9a8;
+        margin-bottom: 16px;
+      }
+
+      .modal-content p {
+        color: #b8ad99;
+        line-height: 1.6;
+        margin-bottom: 32px;
+        font-size: 1rem;
+      }
+
+      .modal-btn {
+        background: linear-gradient(135deg, #d4a65a, #b8872e);
+        border: none;
+        padding: 14px 32px;
+        border-radius: 60px;
+        font-weight: 700;
+        font-size: 1rem;
+        color: #0a0a0a;
+        cursor: pointer;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+        font-family: inherit;
+      }
+
+      .modal-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(212, 166, 90, 0.35);
+      }
+
+      /* АДАПТИВ */
       @media (max-width: 1000px) {
         .accompanion-grid {
           grid-template-columns: 1fr;
@@ -1219,6 +1329,13 @@
         .right-card {
           padding: 24px;
         }
+        .modal-content {
+          padding: 36px 28px;
+          width: 85%;
+        }
+        .modal-content h3 {
+          font-size: 1.5rem;
+        }
       }
 
       @media (max-width: 600px) {
@@ -1269,6 +1386,18 @@
         .info-bottom {
           flex-direction: column;
         }
+        .modal-content {
+          padding: 28px 20px;
+        }
+        .modal-icon {
+          width: 60px;
+          height: 60px;
+          font-size: 1.8rem;
+          margin-bottom: 18px;
+        }
+        .modal-content h3 {
+          font-size: 1.3rem;
+        }
       }
     </style>
   </head>
@@ -1276,6 +1405,21 @@
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
+
+    <!-- МОДАЛЬНОЕ ОКНО -->
+    <div id="successModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-icon">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <h3>Заявка принята! 🎉</h3>
+        <p>
+          Спасибо за доверие! Наш куратор свяжется с вами в ближайшее время для
+          уточнения деталей и назначения собеседования.
+        </p>
+        <button class="modal-btn" onclick="closeModal()">Отлично, жду!</button>
+      </div>
+    </div>
 
     <div class="container">
       <div class="navbar">
@@ -1406,7 +1550,7 @@
     </section>
 
     <div class="container">
-      <!-- ТРАНСФОРМАЦИЯ с изображениями confused.jpg и successful.jpg -->
+      <!-- ТРАНСФОРМАЦИЯ -->
       <div class="accompanion-section">
         <div class="accompanion-card">
           <div class="accompanion-header">
@@ -1492,7 +1636,7 @@
         </div>
       </div>
 
-      <!-- MOTTO с изображением motto.jpg -->
+      <!-- MOTTO -->
       <div class="motto-section">
         <div class="motto-card">
           <div class="motto-content">
@@ -1692,6 +1836,27 @@
     </div>
 
     <script>
+      // Функции для модального окна
+      function showModal() {
+        const modal = document.getElementById("successModal");
+        modal.classList.add("show-modal");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeModal() {
+        const modal = document.getElementById("successModal");
+        modal.classList.remove("show-modal");
+        document.body.style.overflow = "";
+      }
+
+      // Закрытие по клику вне окна
+      window.onclick = function (event) {
+        const modal = document.getElementById("successModal");
+        if (event.target === modal) {
+          closeModal();
+        }
+      };
+
       // Анимация при скролле
       const observer = new IntersectionObserver(
         (entries) => {
@@ -1713,7 +1878,7 @@
           observer.observe(el);
         });
 
-      // ========== EMAILJS НАСТРОЙКА ==========
+      // EMAILJS НАСТРОЙКА
       emailjs.init("KGGpHj0EI0t7-qaQp");
 
       const SERVICE_ID = "service_1wikn0k";
@@ -1756,9 +1921,8 @@
             );
 
             if (response.status === 200) {
-              alert(
-                `✅ Спасибо, ${parentName}! Заявка на ребенка ${childName} (${classNumber} класс) принята. Наш куратор свяжется с вами.`,
-              );
+              // Показываем премиальное модальное окно вместо alert
+              showModal();
               form.reset();
             } else {
               throw new Error("Ошибка отправки");
