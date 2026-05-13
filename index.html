@@ -2,7 +2,10 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
     <title>VZLET CLUB | Элитный образовательный клуб</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,7 +17,6 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
-    <!-- EmailJS библиотека -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
       * {
@@ -547,6 +549,7 @@
         justify-content: center;
         gap: 16px;
         margin-bottom: 48px;
+        flex-wrap: wrap;
       }
 
       .accompanion-line {
@@ -571,11 +574,12 @@
       }
 
       .accompanion-header h2 {
-        font-size: 1.1rem;
+        font-size: clamp(0.9rem, 4vw, 1.1rem);
         font-weight: 600;
         letter-spacing: 2px;
         text-transform: uppercase;
         color: #ecd9a8;
+        text-align: center;
         white-space: nowrap;
       }
 
@@ -591,8 +595,10 @@
       }
 
       .stage-image {
-        width: 220px;
-        height: 220px;
+        width: 100%;
+        max-width: 220px;
+        height: auto;
+        aspect-ratio: 1 / 1;
         margin: 0 auto 16px;
         border-radius: 32px;
         overflow: hidden;
@@ -836,17 +842,10 @@
       .motto-image {
         position: relative;
         overflow: hidden;
-      }
-
-      .motto-image-wrapper {
-        position: relative;
-        width: 100%;
-        height: 100%;
         min-height: 320px;
-        overflow: hidden;
       }
 
-      .motto-image-wrapper img {
+      .motto-image img {
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -981,6 +980,8 @@
       .cta-features {
         display: flex;
         gap: 32px;
+        flex-wrap: wrap;
+        justify-content: center;
       }
 
       .cta-feature {
@@ -1119,6 +1120,7 @@
         transform: translateY(0);
       }
 
+      /* АДАПТИВ (МОБИЛЬНЫЕ) */
       @media (max-width: 1000px) {
         .accompanion-grid {
           grid-template-columns: 1fr;
@@ -1141,24 +1143,31 @@
           left: -4px;
         }
         .stage-image {
-          width: 160px;
-          height: 160px;
+          max-width: 180px;
         }
         .benefits-grid {
-          grid-template-columns: repeat(2, 1fr);
-          gap: 16px;
+          grid-template-columns: 1fr;
+          gap: 20px;
         }
         .benefit-card:nth-child(1),
         .benefit-card:nth-child(2),
         .benefit-card:nth-child(3),
         .benefit-card:nth-child(4) {
-          grid-column: span 2;
+          grid-column: span 1;
         }
         .motto-card {
           grid-template-columns: 1fr;
         }
-        .motto-image-wrapper {
-          min-height: 240px;
+        .motto-image {
+          min-height: 200px;
+          order: -1;
+        }
+        .motto-image-overlay {
+          background: linear-gradient(
+            0deg,
+            rgba(15, 15, 20, 0.8) 0%,
+            rgba(15, 15, 20, 0.3) 100%
+          );
         }
         .cta-content {
           flex-direction: column;
@@ -1169,7 +1178,6 @@
         }
         .cta-features {
           justify-content: center;
-          flex-wrap: wrap;
         }
         .form-grid {
           grid-template-columns: 1fr;
@@ -1181,37 +1189,85 @@
           grid-template-columns: 1fr;
         }
         .hero-content {
-          padding: 80px 40px;
+          padding: 60px 30px;
         }
         .hero-content h1 {
-          font-size: clamp(40px, 8vw, 80px);
+          font-size: clamp(36px, 7vw, 70px);
+        }
+        .hero-content h2 {
+          font-size: 1.1rem;
         }
         .navbar {
           flex-direction: column;
           border-radius: 40px;
+          top: 10px;
         }
         .nav-menu {
           justify-content: center;
         }
         .accompanion-header h2 {
-          font-size: 0.8rem;
           white-space: normal;
           text-align: center;
+          font-size: 0.85rem;
+        }
+        .accompanion-line {
+          display: none;
+        }
+        .hero-parent-message {
+          padding: 20px;
+        }
+        .right-card {
+          padding: 24px;
         }
       }
 
       @media (max-width: 600px) {
-        .benefits-grid {
-          grid-template-columns: 1fr;
+        .hero-content {
+          padding: 40px 20px;
         }
-        .cta-features {
-          gap: 20px;
+        .hero-parent-message p {
+          font-size: 0.9rem;
         }
-        .motto-text {
-          font-size: 1.2rem;
+        .opp-item {
+          padding: 14px;
+          gap: 10px;
+        }
+        .opp-icon {
+          width: 40px;
+          height: 40px;
+          font-size: 1.1rem;
+        }
+        .opp-number {
+          width: 26px;
+          height: 26px;
+          font-size: 0.7rem;
+        }
+        .opp-text {
+          font-size: 0.75rem;
+        }
+        .spots-grid {
+          gap: 24px;
+        }
+        .spot-number {
+          font-size: 2.5rem;
         }
         .form-premium {
           padding: 32px 24px;
+        }
+        .cta-card {
+          padding: 32px 24px;
+        }
+        .motto-text {
+          font-size: 1.1rem;
+        }
+        .stage-text {
+          font-size: 0.75rem;
+        }
+        .stage-image {
+          max-width: 140px;
+        }
+        .info-bottom {
+          flex-direction: column;
         }
       }
     </style>
@@ -1247,14 +1303,10 @@
       </div>
     </div>
 
-    <!-- HERO -->
+    <!-- HERO с изображением hero.jpg -->
     <div class="container">
       <div class="hero-full">
-        <img
-          class="hero-bg"
-          src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2400&auto=format&fit=crop"
-          alt="Premium students"
-        />
+        <img class="hero-bg" src="hero.jpg" alt="VZLET CLUB" />
         <div class="hero-overlay"></div>
         <div class="hero-content">
           <div class="hero-badge">ЧАСТНЫЙ КЛУБ</div>
@@ -1354,7 +1406,7 @@
     </section>
 
     <div class="container">
-      <!-- ТРАНСФОРМАЦИЯ -->
+      <!-- ТРАНСФОРМАЦИЯ с изображениями confused.jpg и successful.jpg -->
       <div class="accompanion-section">
         <div class="accompanion-card">
           <div class="accompanion-header">
@@ -1367,10 +1419,7 @@
           <div class="accompanion-grid">
             <div class="stage-card hidden">
               <div class="stage-image">
-                <img
-                  src="https://images.unsplash.com/photo-1513258496099-48168024aec0?q=80&w=2000&auto=format&fit=crop"
-                  alt="Растерянный школьник"
-                />
+                <img src="confused.jpg" alt="Растерянный школьник" />
               </div>
               <div class="stage-text">
                 от <strong>растерянного школьника</strong>, который боится
@@ -1389,10 +1438,7 @@
             <div class="arrow-divider"><div class="arrow-line"></div></div>
             <div class="stage-card hidden">
               <div class="stage-image">
-                <img
-                  src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2000&auto=format&fit=crop"
-                  alt="Успешный студент"
-                />
+                <img src="successful.jpg" alt="Успешный студент" />
               </div>
               <div class="stage-text">
                 до
@@ -1446,7 +1492,7 @@
         </div>
       </div>
 
-      <!-- MOTTO -->
+      <!-- MOTTO с изображением motto.jpg -->
       <div class="motto-section">
         <div class="motto-card">
           <div class="motto-content">
@@ -1461,13 +1507,8 @@
             </div>
           </div>
           <div class="motto-image">
-            <div class="motto-image-wrapper">
-              <img
-                src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?q=80&w=2200&auto=format&fit=crop"
-                alt="Путь к вершине"
-              />
-              <div class="motto-image-overlay"></div>
-            </div>
+            <img src="motto.jpg" alt="Путь к вершине" />
+            <div class="motto-image-overlay"></div>
           </div>
         </div>
       </div>
@@ -1673,33 +1714,27 @@
         });
 
       // ========== EMAILJS НАСТРОЙКА ==========
-      // Инициализация EmailJS с вашим Public Key
       emailjs.init("KGGpHj0EI0t7-qaQp");
 
-      // Ваши ID
       const SERVICE_ID = "service_1wikn0k";
       const TEMPLATE_ID = "template_z8k7l7r";
 
-      // Получаем форму
       const form = document.getElementById("applicationForm");
 
       if (form) {
         form.addEventListener("submit", async function (e) {
           e.preventDefault();
 
-          // Получаем значения полей
           const parentName = document.getElementById("parentName").value.trim();
           const childName = document.getElementById("childName").value.trim();
           const phone = document.getElementById("phone").value.trim();
           const classNumber = document.getElementById("classNumber").value;
 
-          // Валидация
           if (!parentName || !childName || !phone || !classNumber) {
             alert("Пожалуйста, заполните все поля формы.");
             return;
           }
 
-          // Меняем кнопку на "Отправка..."
           const submitBtn = form.querySelector('button[type="submit"]');
           const originalText = submitBtn.innerHTML;
           submitBtn.innerHTML =
@@ -1707,16 +1742,13 @@
           submitBtn.disabled = true;
 
           try {
-            // Подготавливаем параметры для отправки
-            // Названия переменных должны совпадать с переменными в шаблоне EmailJS
             const templateParams = {
-              parent_name: parentName, // {{parent_name}} в шаблоне
-              child_name: childName, // {{child_name}} в шаблоне
-              phone: phone, // {{phone}} в шаблоне
-              class: classNumber, // {{class}} в шаблоне
+              parent_name: parentName,
+              child_name: childName,
+              phone: phone,
+              class: classNumber,
             };
 
-            // Отправляем через EmailJS
             const response = await emailjs.send(
               SERVICE_ID,
               TEMPLATE_ID,
@@ -1725,9 +1757,9 @@
 
             if (response.status === 200) {
               alert(
-                `✅ Спасибо, ${parentName}! Заявка на ребенка ${childName} (${classNumber} класс) принята. Наш куратор свяжется с вами в ближайшее время.`,
+                `✅ Спасибо, ${parentName}! Заявка на ребенка ${childName} (${classNumber} класс) принята. Наш куратор свяжется с вами.`,
               );
-              form.reset(); // Очищаем форму
+              form.reset();
             } else {
               throw new Error("Ошибка отправки");
             }
@@ -1737,7 +1769,6 @@
               "❌ Ошибка отправки. Пожалуйста, свяжитесь с нами по телефону.",
             );
           } finally {
-            // Возвращаем кнопку в исходное состояние
             submitBtn.innerHTML = originalText;
             submitBtn.disabled = false;
           }
